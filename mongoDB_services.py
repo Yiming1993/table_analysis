@@ -92,6 +92,6 @@ def get_one_sample_data(db, collection):
 
     return data
 
-if __name__ == '__main__':
-    db = connect_db_nopwd('localhost', '27017', '企业')
-    get_one_sample_data(db, 'IT桔子全人工智能企业')
+def get_one_sample_data_with_search(db, collection_name, find_tag, find_rule):
+    data = db[collection_name].find_one({find_tag:{"$regex":find_rule}})
+    return data

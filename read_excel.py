@@ -52,6 +52,7 @@ class read_excel():
         file_new_name = file_name[0] + '.xlsx'
         data = pd.read_excel(file_path)
         data.to_excel(file_new_name, index=False)
+        return file_new_name
 
     def save_data(self, db, collection, data, tag):
         mongoDB_services.save_data(db, collection, data, exist_detect_tag=tag, exist_detect=False)
@@ -59,15 +60,16 @@ class read_excel():
 
 if __name__ == '__main__':
     R = read_excel()
-    file_path = '/Users/Yiming/PycharmProject/data_tools/人工智能领域公司数据包-20200407.xlsx'
-    file_type = file_path.split('.')
+    file_path =
+    file_type = file_path.split('')[1]
     db = mongoDB_services.connect_db_nopwd('localhost','27017', '企业')
     if file_type == 'xls':
-        R.xls2xlsx(file_path)
+        file_path = R.xls2xlsx(file_path)
     else:
-        R.read_excel_sheets(file_path)
-        for data in R.read_sheet_content(1):
-            R.save_data(db, 'IT桔子全人工智能企业_无融资',data,'公司名称')
+        pass
+    R.read_excel_sheets(file_path)
+    for data in R.read_sheet_content(0):
+        R.save_data(db, '',data,'')
 
 
 
